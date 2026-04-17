@@ -1,73 +1,53 @@
-# React + TypeScript + Vite
+Commodity Prices Buddy - Chrome Extension (MV3)
+A high-performance Chrome Extension dashboard providing real-time telemetry for global fuel prices, commodities, and FX rates. Built with a focus on Message Loop integrity and clean architectural separation.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🏗 Architecture & Design Patterns
+This project implements a Distributed Message Bus architecture typical of robust Chrome Extensions:
 
-Currently, two official plugins are available:
+Kernel (Service Worker): Acts as the central I/O hub. Handles asynchronous fetch operations to the OilPriceAPI and manages the long-lived message channel using the sendResponse (Async Return True) pattern.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+UI Layer (React + Vite): A decoupled React 18 application that serves as the telemetry dashboard. It utilizes CSS Grid for a 2-column layout and Chart.js for data visualization.
 
-## React Compiler
+Context Switching: Designed to handle the ephemeral nature of Manifest V3 service workers, ensuring state persistence and reliable IPC (Inter-Process Communication) between the background script and the popup UI.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🛠 Tech Stack
+Engine: Node.js / Vite
 
-## Expanding the ESLint configuration
+Frontend: React 18 / TypeScript
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Visualization: Chart.js (Native implementation with minimal wrappers)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Communication: Chrome Runtime Messaging (MV3)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Styling: Modern CSS (Grid/Flexbox) with a focus on Industrial UI aesthetics.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+🚀 Key Features
+Grouped Telemetry: Automated data-shaping that categorizes flat API responses into logical sectors (Energy vs. FX/Metals).
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Real-time Visualization: Categorized Bar Charts with customized tooltips and legends for high-density information display.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Optimized Rendering: Uses React’s lifecycle to manage the message loop, ensuring the UI only updates when the "Kernel" broadcasts new data.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+SVG-in-JS: Custom vector iconography for a lightweight, dependency-free UI.
+
+📦 Installation & Development
+Clone & Install:
+
+Bash
+git clone [your-repo-link]
+cd commodity-prices-buddy
+npm install
+Build:
+
+Bash
+npm run build
+Load in Chrome:
+
+Navigate to chrome://extensions/
+
+Enable Developer Mode.
+
+Click Load unpacked and select the dist folder.
+
+🧠 Senior Note
+"The choice of Manifest V3 was driven by the need for a modern, secure service-worker based execution environment. By treating the background script as a stateless controller and the storage as a local cache, the extension achieves 100% reliability even during worker termination cycles."
