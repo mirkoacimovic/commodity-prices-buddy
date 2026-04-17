@@ -1,4 +1,5 @@
 Commodity Prices Buddy - Chrome Extension (MV3)
+
 A high-performance Chrome Extension dashboard providing real-time telemetry for global fuel prices, commodities, and FX rates. Built with a focus on Message Loop integrity and clean architectural separation.
 
 🏗 Architecture & Design Patterns
@@ -49,5 +50,4 @@ Enable Developer Mode.
 
 Click Load unpacked and select the dist folder.
 
-🧠 Senior Note
-"The choice of Manifest V3 was driven by the need for a modern, secure service-worker based execution environment. By treating the background script as a stateless controller and the storage as a local cache, the extension achieves 100% reliability even during worker termination cycles."
+Enjoy !
