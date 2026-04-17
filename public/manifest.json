@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Fuel Prices",
+  "version": "0.0.1",
+  "description": "Breakdown of current fuel prices",
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": ["scripting", "tabs"],
+  "host_permissions": ["http://*//*", "https://*//*"]
+}
