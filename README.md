@@ -14,7 +14,7 @@ Context Switching: Designed to handle the ephemeral nature of Manifest V3 servic
 🛠 Tech Stack
 Engine: Node.js / Vite
 
-Frontend: React 18 / TypeScript
+Frontend: React 19 / TypeScript
 
 Visualization: Chart.js (Native implementation with minimal wrappers)
 
